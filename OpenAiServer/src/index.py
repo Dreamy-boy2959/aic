@@ -1,8 +1,9 @@
-from flask import Flask, request, url_for, jsonify, send_from_directory
+import os
+
+from flask import Flask, request, send_from_directory
 from flask_cors import CORS
+
 from ai_search.faiss_singleton import FaissSingleton
-import glob, os
-from pathlib import Path
 
 # Map list
 videoToId = {
@@ -1295,9 +1296,10 @@ def serve_image(filename):
 def search():
     search_type = request.args.get('searchType')
     query = request.args.get('q')
+    limit = request.args.get('limit')
 
     # Log it out
-    results = instance.search(search_type, query)
+    results = instance.search(search_type, query, int(limit))
 
     results = [{
         "url": f"{TEMP_ENDPOINT}/images/{result}",
@@ -1312,7 +1314,7 @@ def search():
 def moreLikeThis():
     vidID = request.args.get('vidID').replace("/", os.sep)
     fullPath = os.path.join(IMAGE_DIR, vidID)
-    RETURN_THRESHOLD = 4;
+    RETURN_THRESHOLD = 8;
 
     if os.path.exists(fullPath):
         fileName = os.path.basename(fullPath)

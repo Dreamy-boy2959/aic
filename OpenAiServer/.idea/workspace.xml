@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e3db88b-d07f-4b9c-a276-f4287c110a51" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/OpenAIServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OpenAIServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AI-challenge-UI/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../AI-challenge-UI/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AI-challenge-UI/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../AI-challenge-UI/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/metadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ai_search/faiss_singleton.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ai_search/faiss_singleton.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ai_search/faiss_impl.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ai_search/faiss_impl.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,12 +39,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.faiss_impl.executor": "Run",
     "Python.faiss_singleton.executor": "Run",
     "Python.index.executor": "Run",
     "Python.obj_detection.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/magic/Documents/repo/AIC/OpenAiServer",
+    "last_opened_file_path": "C:/Users/magic/Documents/repo/AIC",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -118,7 +117,9 @@
       <workItem from="1755437445556" duration="8375000" />
       <workItem from="1755954855230" duration="1530000" />
       <workItem from="1756371392953" duration="1487000" />
-      <workItem from="1756604743558" duration="4708000" />
+      <workItem from="1756604743558" duration="5039000" />
+      <workItem from="1758336968553" duration="1320000" />
+      <workItem from="1758340291778" duration="1725000" />
     </task>
     <servers />
   </component>
@@ -134,8 +135,9 @@
     <SUITE FILE_PATH="coverage/OpenAiServer$faiss_singleton.coverage" NAME="faiss_singleton Coverage Results" MODIFIED="1756605498532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ai_search" />
     <SUITE FILE_PATH="coverage/OpenAIServer$obj_detection.coverage" NAME="obj_detection Coverage Results" MODIFIED="1756371453852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ai_search" />
     <SUITE FILE_PATH="coverage/OpenAIServer$index.coverage" NAME="index Coverage Results" MODIFIED="1756372929167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/OpenAiServer$faiss_impl.coverage" NAME="faiss_impl Coverage Results" MODIFIED="1758341351844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ai_search" />
     <SUITE FILE_PATH="coverage/OpenAIServer$faiss_singleton.coverage" NAME="faiss_singleton Coverage Results" MODIFIED="1755443517369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ai_search" />
-    <SUITE FILE_PATH="coverage/OpenAiServer$index.coverage" NAME="index Coverage Results" MODIFIED="1756609096513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/OpenAiServer$obj_detection.coverage" NAME="obj_detection Coverage Results" MODIFIED="1756605043246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ai_search" />
+    <SUITE FILE_PATH="coverage/OpenAiServer$index.coverage" NAME="index Coverage Results" MODIFIED="1758341423046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/OpenAiServer$obj_detection.coverage" NAME="obj_detection Coverage Results" MODIFIED="1758340306067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ai_search" />
   </component>
 </project>

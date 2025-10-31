@@ -24,15 +24,19 @@
             <!-- Search & Filter -->
             <div class="w-75 bg-white rounded-2" style="height: max-content; background: transparent !important;">
                 <div class="input-group mb-3 input-group-lg">
-                    <select class="form-select search-menu search-menu" aria-label="Search Type" style="max-width: 200px; font-size: medium !important;"">
+                    <select class="form-select search-menu" aria-label="Search Type" style="max-width: 150px; font-size: medium !important;">
                         <option value="0">Media Search</option>
                         <option value="1" selected>Object Detection</option>
                         <option value="2">Subtitle Search</option>
                         <option value="3">Face Detection</option>
-                        <option disabled>────────────────────</option>
-                        <option disabled>Face detection returns the slowest*</option>
                     </select>
                     <input type="text"  style="font-size: medium !important;" class="form-control query-input" aria-label="Text input with search type select">
+                    <select class="form-select quantity-select" aria-label="Search Size" style="max-width: 100px; font-size: medium !important;">
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                    </select>
                     <span class="input-group-text text-white" style="color: blue;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000aa" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>

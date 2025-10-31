@@ -5,7 +5,6 @@ import json
 import torch
 import open_clip
 
-MAX_SEARCH = 10
 class FaissSearch:
     tokenizer = None
     metadata = None
@@ -38,7 +37,7 @@ class FaissSearch:
 
         pass
 
-    def search(self, searchType, query):
+    def search(self, searchType, query, limit: int):
             # Encode query text
             with torch.no_grad(), torch.amp.autocast(device_type=self.device):
                 text_tokens = self.tokenizer([query]).to(self.device)
@@ -47,7 +46,7 @@ class FaissSearch:
                 text_vector = text_features.cpu().float().numpy().astype('float32')
 
             # Search
-            distances, indices = self.index.search(text_vector, MAX_SEARCH)
+            distances, indices = self.index.search(text_vector, limit)
 
             # Hiển thị kết quả
             result = []

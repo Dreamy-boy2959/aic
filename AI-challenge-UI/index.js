@@ -47,6 +47,7 @@ function showAlertDanger(message) {
 // Fetch server / Search logic
 const teamTitle = document.getElementsByClassName("team-title")[0];
 const inputField = document.getElementsByClassName("query-input")[0];
+const quantitySelect = document.getElementsByClassName("quantity-select")[0];
 const searchMenu = document.getElementsByClassName("search-menu")[0];
 const filterContainer = document.getElementsByClassName("filter-container")[0];
 const spinner = document.getElementsByClassName("query-spinner")[0];
@@ -78,7 +79,7 @@ inputField.addEventListener("keyup", function (event) {
         // Mock query
         const fetchEndpointFn = async () => {
             try {
-                const response = await fetch(`${fetchEndpoint}/search?searchType=test&q=${event.target.value}`);
+                const response = await fetch(`${fetchEndpoint}/search?searchType=test&q=${event.target.value}&limit=${quantitySelect.value}`);
                 if (!response.ok) {
                     throw new Error(`Response status: ${response.status}`);
                 }
@@ -165,7 +166,14 @@ async function openImageCarousel(endpointUrl) {
         carousel.setAttribute("data-bs-ride", "carousel");
 
         const inner = document.createElement("div");
-        inner.className = "carousel-inner h-100 position-relative";
+        inner.className = "carousel-inner h-50 position-relative";
+
+        // Image preview container
+        const imagePreview = document.createElement("div");
+        imagePreview.className = "image-preview";
+        imagePreview.style.width = "100%";
+        imagePreview.style.height = "50%";
+        imagePreview.classList.add("d-flex", "flex-wrap", "gap-2");
 
         results.forEach((url, i) => {
             const item = document.createElement("div");
@@ -175,23 +183,29 @@ async function openImageCarousel(endpointUrl) {
             img.src = url;
             img.className = "img-fluid position-absolute top-50 start-50 translate-middle ";
 
+            const imgReviewClone = img.cloneNode(true);
+            imgReviewClone.className = "img-fluid";
+            imgReviewClone.style.height = "150px";
+
+            imagePreview.appendChild(imgReviewClone);
             item.appendChild(img);
             inner.appendChild(item);
         });
 
         // Controls
         const prev = `
-        <button class="carousel-control-prev" type="button" style="z-indez: 11" data-bs-target="#${carouselId}" data-bs-slide="prev">
+        <button class="carousel-control-prev h-50" type="button" style="z-indez: 11" data-bs-target="#${carouselId}" data-bs-slide="prev">
           <span class="carousel-control-prev-icon"></span>
         </button>`;
         const next = `
-        <button class="carousel-control-next" type="button" style="z-indez: 11" data-bs-target="#${carouselId}" data-bs-slide="next">
+        <button class="carousel-control-next h-50" type="button" style="z-indez: 11" data-bs-target="#${carouselId}" data-bs-slide="next">
           <span class="carousel-control-next-icon"></span>
         </button>`;
 
         carousel.appendChild(inner);
         carousel.insertAdjacentHTML("beforeend", prev + next);
         wrapper.appendChild(carousel);
+        carousel.appendChild(imagePreview);
 
         // Add to body
         document.body.appendChild(wrapper);
