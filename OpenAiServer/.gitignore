@@ -3,7 +3,6 @@
 
 # Ignore all data under res/ and src/res/ recursively, but allow any .gitkeep files
 # This keeps empty directories tracked via .gitkeep while ignoring all other files.
-/res/**
 !/res/**/.gitkeep
 
 # If there is a res folder inside src, apply the same rule
