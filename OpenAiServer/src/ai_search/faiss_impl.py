@@ -4,9 +4,12 @@ import faiss
 import json
 import torch
 import open_clip
+from PIL import Image
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Tuple
+from io import BytesIO
+import numpy as np
 
 class FaissSearch:
     def __init__(self, index_dir: str, metadata_dir: str, device: str = "cuda"):
@@ -36,7 +39,7 @@ class FaissSearch:
         # Load CLIP model
         logging.info("[+] Loading CLIP model...")
         try:
-            self.model, _, _ = open_clip.create_model_and_transforms(
+            self.model, _, self.preprocess = open_clip.create_model_and_transforms(
                 'hf-hub:laion/CLIP-ViT-H-14-laion2B-s32B-b79K',
                 )
             self.model = self.model.to(self.device)
@@ -51,7 +54,22 @@ class FaissSearch:
         assert self.device is not None
         logging.info("[+] FaissSearch initialized successfully.")
 
-    def search(self, searchType, query: str, limit: int) -> List[str]:
+    def searchImage(self, binaryData, limit: int) -> List[str]:
+        logging.info("[+] Searching image");
+        
+        img_tensor = self.preprocess(Image.open(binaryData).convert("RGB")).unsqueeze(0).to(self.device)
+        with torch.no_grad(), torch.amp.autocast(device_type=self.device):
+            img_features = self.model.encode_image(img_tensor)
+            img_features /= img_features.norm(dim=-1, keepdim=True)
+
+            image_vector = img_features.cpu().numpy().astype("float32")
+            image_vector = np.sign(image_vector) * np.power(np.abs(image_vector), 0.6)
+            image_vector /= np.linalg.norm(image_vector, axis=1, keepdims=True)
+           
+        return self.mapToResult(image_vector, limit)     
+            
+            
+    def searchText(self, searchType, query: str, limit: int) -> List[str]:
         logging.info(f"[+] Encoding query: '{query[:50]}...'")
         try:
             with torch.no_grad(), torch.amp.autocast(device_type=self.device):
@@ -64,7 +82,10 @@ class FaissSearch:
         except Exception as e:
             logging.error(f"Failed to encode query: {e}")
             return []
+        
+        return self.mapToResult(text_vector, limit)
 
+    def mapToResult(self, text_vector, limit): 
         # This list will store tuples of (distance, img_path)
         all_results: List[Tuple[float, str]] = [] 
 
@@ -118,12 +139,14 @@ class FaissSearch:
 
         # Get global Top-K results
         logging.info(f"[+] Found {len(all_results)} total results. Sorting for top {limit}...")
-        all_results.sort(key=lambda x: x[0])
+        # all_results.sort(key=lambda x: x[0])
         final_results = [img_path for dist, img_path in all_results[:limit]]
         
         logging.info(f"[+] Returning {len(final_results)} results.")
 
-        if len(final_results) < 20:
+        if len(final_results) < 12:
              logging.info(f"[+] Results: {final_results}")
              
+             
+        print(final_results)
         return final_results

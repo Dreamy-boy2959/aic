@@ -53,11 +53,32 @@ if os.environ.get("WERKZEUG_RUN_MAIN") == "true" or not app.debug:
 
 
 @app.route("/images/<path:filename>")
-def serve_image(filename):
+def serve_image(filename : str):
     return send_from_directory(IMAGE_DIR, filename)
 
-@app.route('/search')
-def search():
+@app.route("/search/image", methods=['POST'])
+def search_image():
+    if request.method == "POST":
+        image_payload = request.files.get("image_file").stream
+        faiss_result = faiss_instance.searchImage(image_payload, request.args.get('limit') if request.args.get('limit') is not None else 10);
+
+        with open(VIDEO_TO_ID_FILE, 'r', encoding='utf-8') as file:
+            data = json.load(file);
+            
+            faiss_result = [{
+                "url": f"{TEMP_ENDPOINT}/images/{result}",
+                "id": data.get(result.split("/")[1])
+            } for result in faiss_result]
+        
+        return {
+            "faiss": faiss_result
+        }
+    else:
+        logging.error("[-] Wrong method for image searcher");
+    
+
+@app.route('/search/text')
+def search_text():
     search_type = request.args.get('searchType', '', type=str)
     query = request.args.get('q', '', type=str)
     limit = request.args.get('limit')
@@ -69,11 +90,11 @@ def search():
     limit = int(limit);
 
     # Log it out
-    faiss_result = faiss_instance.search(search_type, query, limit)
+    faiss_result = faiss_instance.searchText(search_type, query, limit)
     ocr_result = ocr_instance.compare(query, limit)
 
     results = set(faiss_result).intersection(set(ocr_result));
-    print(faiss_result, ocr_result)
+    # print(faiss_result, ocr_result)
     logging.info(f"[+] Found {len(results)} for query {query}");
 
     with open(VIDEO_TO_ID_FILE, 'r', encoding='utf-8') as file:
